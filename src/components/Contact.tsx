@@ -1,7 +1,28 @@
 import { Mail, MapPin, Clock, Send, User, MessageSquare, Building2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Contact() {
+  const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleElements(prev => new Set([...prev, entry.target.id]));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const elements = document.querySelectorAll('[data-animate]');
+    elements.forEach(el => observerRef.current?.observe(el));
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -75,10 +96,26 @@ function Contact() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-8 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 
+            id="hero-title"
+            data-animate
+            className={`text-5xl md:text-6xl font-bold mb-6 transition-all duration-1000 ${
+              visibleElements.has('hero-title') 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+            }`}
+          >
             Let's Build Something Amazing Together
           </h1>
-          <p className="text-xl text-gray-200">
+          <p 
+            id="hero-subtitle"
+            data-animate
+            className={`text-xl text-gray-200 transition-all duration-1000 delay-300 ${
+              visibleElements.has('hero-subtitle') 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+            }`}
+          >
             Have a project in mind? We'd love to hear from you.
           </p>
         </div>
@@ -91,7 +128,14 @@ function Contact() {
             {contactInfo.map((info, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2"
+                id={`contact-info-${index}`}
+                data-animate
+                className={`bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 ${
+                  visibleElements.has(`contact-info-${index}`) 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-0 translate-y-12 scale-95'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} text-white mb-4`}>
                   {info.icon}
@@ -109,15 +153,49 @@ function Contact() {
       {/* Contact Form */}
       <section className="py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-3xl font-bold mb-2 text-gray-900">
+          <div 
+            id="contact-form"
+            data-animate
+            className={`bg-white rounded-2xl shadow-xl p-8 transition-all duration-1000 ${
+              visibleElements.has('contact-form') 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-16'
+            }`}
+          >
+            <h2 
+              id="form-title"
+              data-animate
+              className={`text-3xl font-bold mb-2 text-gray-900 transition-all duration-1000 delay-200 ${
+                visibleElements.has('form-title') 
+                  ? 'opacity-100 translate-x-0' 
+                  : 'opacity-0 -translate-x-8'
+              }`}
+            >
               Send Us a Message
             </h2>
-            <p className="text-gray-600 mb-8">
+            <p 
+              id="form-subtitle"
+              data-animate
+              className={`text-gray-600 mb-8 transition-all duration-1000 delay-400 ${
+                visibleElements.has('form-subtitle') 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-4'
+              }`}
+            >
               Fill out the form below and we'll get back to you within 24 hours.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+
+              <div 
+                id="form-fields"
+                data-animate
+                className={`transition-all duration-1000 delay-600 ${
+                  visibleElements.has('form-fields') 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+              >
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -210,9 +288,17 @@ function Contact() {
                 </div>
               </div>
 
+              </div>
+
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                id="submit-button"
+                data-animate
+                className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-1000 delay-800 ${
+                  visibleElements.has('submit-button') 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-0 translate-y-8 scale-95'
+                }`}
               >
                 <Send className="w-5 h-5 inline mr-2" />
                 Send Message

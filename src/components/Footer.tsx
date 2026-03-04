@@ -1,4 +1,4 @@
-import { ArrowRight, Linkedin, Twitter, Facebook, Youtube } from 'lucide-react';
+import { ArrowRight, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -17,17 +17,11 @@ export default function Footer() {
             </div>
 
             <div className="flex gap-6">
-              <a href="#" className="hover:opacity-70 transition">
+              <a href="https://www.linkedin.com/company/daflitech/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition">
                 <Linkedin className="w-8 h-8" />
               </a>
-              <a href="#" className="hover:opacity-70 transition">
-                <Twitter className="w-8 h-8" />
-              </a>
-              <a href="#" className="hover:opacity-70 transition">
-                <Facebook className="w-8 h-8" />
-              </a>
-              <a href="#" className="hover:opacity-70 transition">
-                <Youtube className="w-8 h-8" />
+              <a href="mailto:daflitechtechnologies@gmail.com" className="hover:opacity-70 transition">
+                <Mail className="w-8 h-8" />
               </a>
             </div>
           </div>

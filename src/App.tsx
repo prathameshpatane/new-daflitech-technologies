@@ -1,5 +1,6 @@
-import { Menu, Search } from 'lucide-react';
+import { Menu, Search, X } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 import Hero from './components/Hero';
 import ColorSection from './components/ColorSection';
 import TheNext from './components/TheNext';
@@ -13,6 +14,9 @@ import Footer from './components/Footer';
 import WhatWeDo from './components/Whatwedo';
 import Contact from './components/Contact';
 import Mission from './components/Mission';
+import Clients from './components/Clients';
+import ScrollToTop from './components/ScrollToTop';
+import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 
 // Page Components
 function HomePage() {
@@ -75,35 +79,10 @@ function WhatWeDoPage() {
   );
 }
 
-function WhoWeArePage() {
+function ClientsPage() {
   return (
     <div className="pt-20">
-      <div className="max-w-7xl mx-auto px-8 py-16">
-        <h1 className="text-5xl font-bold mb-8">Who We Are</h1>
-        <div className="space-y-8">
-          <p className="text-xl text-gray-700">
-            Daflitech is a leading digital transformation partner, helping businesses navigate the complexities 
-            of the modern digital landscape.
-          </p>
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-              <p className="text-gray-700">
-                To empower organizations with innovative technology solutions that drive sustainable growth 
-                and create lasting value.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-              <p className="text-gray-700">
-                To be the trusted partner for businesses seeking to thrive in the digital age through 
-                cutting-edge technology and strategic innovation.
-              </p>
-            </div>
-          </div>
-          <About />
-        </div>
-      </div>
+      <Clients />
     </div>
   );
 }
@@ -131,13 +110,15 @@ function ContactPage() {
 }
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <Router>
       <div className="min-h-screen bg-white">
         <nav className="fixed top-0 w-full bg-black text-white z-50 px-8 py-4">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-12">
-              <Link to="/">
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
                 <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition">
                   Daflitech
                 </h1>
@@ -146,33 +127,80 @@ function App() {
                 <Link to="/what-we-do" className="hover:opacity-70 transition">
                   WHAT WE DO
                 </Link>
-                <Link to="/who-we-are" className="hover:opacity-70 transition">
-                  WHO WE ARE
+                <Link to="/clients" className="hover:opacity-70 transition">
+                  CLIENTS
                 </Link>
                 <Link to="/think" className="hover:opacity-70 transition">
                   MISSION
                 </Link>
-                <Link to="/contact
-                " className="hover:opacity-70 transition">
+                <Link to="/contact" className="hover:opacity-70 transition">
                   CONTACT
                 </Link>
               </div>
             </div>
             <div className="flex items-center gap-6">
               <Search className="w-5 h-5 cursor-pointer hover:opacity-70 transition" />
-              <Menu className="w-6 h-6 cursor-pointer hover:opacity-70 transition" />
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 cursor-pointer hover:opacity-70 transition" />
+                ) : (
+                  <Menu className="w-6 h-6 cursor-pointer hover:opacity-70 transition" />
+                )}
+              </button>
+              <Menu className="hidden md:block w-6 h-6 cursor-pointer hover:opacity-70 transition" />
+            </div>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          }`}>
+            <div className="px-4 py-6 space-y-4 border-t border-gray-700 mt-4">
+              <Link 
+                to="/what-we-do" 
+                className="block text-sm hover:opacity-70 transition py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                WHAT WE DO
+              </Link>
+              <Link 
+                to="/clients" 
+                className="block text-sm hover:opacity-70 transition py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                CLIENTS
+              </Link>
+              <Link 
+                to="/think" 
+                className="block text-sm hover:opacity-70 transition py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                MISSION
+              </Link>
+              <Link 
+                to="/contact" 
+                className="block text-sm hover:opacity-70 transition py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                CONTACT
+              </Link>
             </div>
           </div>
         </nav>
 
+        <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/what-we-do" element={<WhatWeDoPage />} />
-          <Route path="/who-we-are" element={<WhoWeArePage />} />
+          <Route path="/clients" element={<ClientsPage />} />
           <Route path="/think" element={<ThinkPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
 
+        <ScrollToTop />
         <Footer />
       </div>
     </Router>
