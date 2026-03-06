@@ -27,12 +27,11 @@ export default function Hero() {
             </button>
           </div>
 
-          <div className={`relative h-96 rounded-lg overflow-hidden ${isVisible ? 'animate-fade-in-right delay-300' : 'opacity-0'}`}>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm"></div>
+          <div className={`relative h-96 w-96 mx-auto ${isVisible ? 'animate-fade-in-right delay-300' : 'opacity-0'}`}>
             <img
-              src="https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="Champions"
-              className="w-full h-full object-cover"
+              src="/daf.png"
+              alt="Daflitech Technologies"
+              className="w-full h-full object-cover object-center rounded-full"
             />
           </div>
         </div>

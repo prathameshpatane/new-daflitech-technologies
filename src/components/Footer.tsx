@@ -45,15 +45,15 @@ export default function Footer() {
               <h3 className="font-bold text-gray-900 mb-4">Subsidiaries</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><a href="#" className="hover:text-gray-900">EdgeVerve</a></li>
-                <li><a href="#" className="hover:text-gray-900">Infosys BPM</a></li>
-                <li><a href="#" className="hover:text-gray-900">Infosys Consulting</a></li>
+                <li><a href="#" className="hover:text-gray-900">Daflitech BPM</a></li>
+                <li><a href="#" className="hover:text-gray-900">Daflitech Consulting</a></li>
               </ul>
             </div>
 
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Programs</h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900">Infosys Foundation</a></li>
+                <li><a href="#" className="hover:text-gray-900">Daflitech Principles</a></li>
                 <li><a href="#" className="hover:text-gray-900">STEM Education</a></li>
                 <li><a href="#" className="hover:text-gray-900">Digital Academy</a></li>
               </ul>
@@ -81,7 +81,7 @@ export default function Footer() {
           </div>
 
           <div className="border-t border-gray-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
-            <p>&copy; 2026 Infosys Limited. All rights reserved.</p>
+            <p>&copy; 2026 Daflitech Technologies. All rights reserved.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-gray-900">Privacy Statement</a>
               <a href="#" className="hover:text-gray-900">Cookie Policy</a>
