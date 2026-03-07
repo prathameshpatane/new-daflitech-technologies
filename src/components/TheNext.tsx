@@ -34,11 +34,11 @@ export default function TheNext() {
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div className={`relative h-96 rounded-lg overflow-hidden group ${isVisible ? 'animate-fade-in-left delay-200' : 'opacity-0'}`}>
-            <img
-              src="https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg?auto=compress&cs=tinysrgb&w=800"
-              alt="VR Innovation"
-              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-            />
+       <img
+  src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800"
+  alt="Technology Development"
+  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
           </div>
 
