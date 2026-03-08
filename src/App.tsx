@@ -121,7 +121,7 @@ function App() {
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
                 <img src="/daflitech.png" alt="Daflitech" className="h-10 w-auto" />
                 <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition">
-                  Daflitech
+                  Daflitech Technologies
                 </h1>
               </Link>
               <div className="hidden md:flex gap-8 text-sm">
