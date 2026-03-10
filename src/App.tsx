@@ -34,7 +34,7 @@ function HomePage() {
         imageType="butterfly"
       />
       <ColorSection
-        bgColor="bg-blue-700"
+        bgColor="bg-blue-600"
         title="Digital Operating Model"
         description="Navigate complexity with agile frameworks and collaborative ecosystems"
         items={[
@@ -190,49 +190,49 @@ function App() {
           `}
         </style>
         
-        <nav className={`fixed top-0 w-full bg-white text-gray-900 z-50 px-8 py-4 shadow-md transition-transform duration-300 ${
+        <nav className={`fixed top-0 w-full bg-transparent z-50 px-8 py-4 transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-12">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
                 <img src="/daflitech.png" alt="Daflitech" className="h-10 w-auto" />
-                <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition">
+                <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition text-blue-800">
                   Daflitech Technologies
                 </h1>
               </Link>
               <div className="hidden md:flex gap-8 text-sm">
-                <Link to="/what-we-do" className="relative hover:text-purple-600 transition group">
+                <Link to="/what-we-do" className="relative hover:text-purple-300 transition group text-blue-800">
                   WHAT WE DO
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/clients" className="relative hover:text-purple-600 transition group">
+                <Link to="/clients" className="relative hover:text-purple-300 transition group text-blue-800">
                   CLIENTS
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/think" className="relative hover:text-purple-600 transition group">
+                <Link to="/think" className="relative hover:text-purple-300 transition group text-blue-800">
                   MISSION
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/contact" className="relative hover:text-purple-600 transition group">
+                <Link to="/contact" className="relative hover:text-purple-300 transition group text-blue-800">
                   CONTACT
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Search className="w-5 h-5 cursor-pointer hover:text-purple-600 transition" />
+              <Search className="w-5 h-5 cursor-pointer hover:text-purple-300 transition text-blue-800" />
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 cursor-pointer hover:text-purple-600 transition" />
+                  <X className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
                 ) : (
-                  <Menu className="w-6 h-6 cursor-pointer hover:text-purple-600 transition" />
+                  <Menu className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
                 )}
               </button>
-              <Menu className="hidden md:block w-6 h-6 cursor-pointer hover:text-purple-600 transition" />
+              <Menu className="hidden md:block w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
             </div>
           </div>
           
@@ -240,31 +240,31 @@ function App() {
           <div className={`md:hidden transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
           }`}>
-            <div className="px-4 py-6 space-y-4 border-t border-gray-200 mt-4">
+            <div className="px-4 py-6 space-y-4 border-t border-white/20 mt-4">
               <Link 
                 to="/what-we-do" 
-                className="block text-sm hover:text-purple-600 transition py-2"
+                className="block text-sm hover:text-purple-300 transition py-2 text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 WHAT WE DO
               </Link>
               <Link 
                 to="/clients" 
-                className="block text-sm hover:text-purple-600 transition py-2"
+                className="block text-sm hover:text-purple-300 transition py-2 text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 CLIENTS
               </Link>
               <Link 
                 to="/think" 
-                className="block text-sm hover:text-purple-600 transition py-2"
+                className="block text-sm hover:text-purple-300 transition py-2 text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 MISSION
               </Link>
               <Link 
                 to="/contact" 
-                className="block text-sm hover:text-purple-600 transition py-2"
+                className="block text-sm hover:text-purple-300 transition py-2 text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 CONTACT
