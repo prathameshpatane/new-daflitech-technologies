@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 export default function Investors() {
@@ -27,32 +26,45 @@ export default function Investors() {
     <section ref={sectionRef} className="py-24 px-8 bg-gradient-to-br from-teal-600 to-cyan-700 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className={`relative h-96 rounded-lg overflow-hidden ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
+          <div className={`relative h-96 rounded-lg overflow-hidden group cursor-pointer ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <img
-              src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800"
-              alt="Investor Central"
-              className="w-full h-full object-cover"
+              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Growth & Innovation"
+              className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-              <p className="text-xl font-semibold">Integrated Annual Report 2024</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/90 group-hover:to-black/60 transition duration-500"></div>
+            
+            {/* Text that slides up on hover - completely hidden initially */}
+            <div className="absolute inset-0 flex flex-col justify-end p-6">
+              <div className="transform translate-y-32 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500">
+                <p className="text-2xl font-semibold mb-4">
+                  Accelerating Digital Transformation
+                </p>
+                <p className="text-lg opacity-90 mb-3">
+                  Driving innovation through cutting-edge technology and strategic excellence in the digital era.
+                </p>
+                <p className="text-base opacity-80">
+                  Transforming businesses with scalable solutions and sustainable growth strategies.
+                </p>
+              </div>
             </div>
           </div>
 
           <div className="space-y-6">
-            <p className={`text-sm uppercase tracking-wider opacity-80 ${isVisible ? 'animate-fade-in-right delay-100' : 'opacity-0'}`}>Investors</p>
+            <p className={`text-sm uppercase tracking-wider opacity-80 ${isVisible ? 'animate-fade-in-right delay-100' : 'opacity-0'}`}>Growth & Innovation</p>
             <h2 className={`text-5xl font-bold leading-tight ${isVisible ? 'animate-fade-in-right delay-200' : 'opacity-0'}`}>
-              Maximizing long-term value with transparent governance
+              Scaling Excellence Through Innovation
             </h2>
             <div className={`space-y-4 ${isVisible ? 'animate-fade-in-right delay-300' : 'opacity-0'}`}>
               <div>
-                <h3 className="text-2xl font-semibold mb-2">Investor Central</h3>
-                <p className="opacity-90">Access financial reports, stock information, and governance documents</p>
+                <h3 className="text-2xl font-semibold mb-2">Exponential Growth</h3>
+                <p className="opacity-90">Leveraging cutting-edge technologies and strategic partnerships to deliver 300% year-over-year growth in digital solutions</p>
+              </div>
+              <div className="mt-6">
+                <h3 className="text-2xl font-semibold mb-2">Future-Ready Solutions</h3>
+                <p className="opacity-90">Empowering businesses with AI-driven platforms, cloud infrastructure, and automation that drive measurable results</p>
               </div>
             </div>
-            <button className={`flex items-center gap-2 bg-white text-teal-700 px-8 py-4 rounded-sm hover:bg-gray-100 transition font-semibold mt-8 ${isVisible ? 'animate-fade-in-right delay-400' : 'opacity-0'}`}>
-              Visit Investor Relations
-              <ArrowRight className="w-5 h-5" />
-            </button>
           </div>
         </div>
       </div>

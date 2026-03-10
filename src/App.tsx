@@ -1,6 +1,6 @@
 import { Menu, Search, X } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import ColorSection from './components/ColorSection';
 import TheNext from './components/TheNext';
@@ -41,10 +41,11 @@ function HomePage() {
           { title: "Agile transformation", subtitle: "Enable rapid adaptation to market changes" },
           { title: "Data-driven insights", subtitle: "Unlock value from your digital infrastructure" }
         ]}
-        imageType="landscape"
+        imageType="technology"
+        imageLeft={true}
       />
       <ColorSection
-        bgColor="bg-purple-700"
+        bgColor="bg-yellow-500"
         title="Empowering Talent Transformations"
         description="Cultivate future-ready skills and foster inclusive growth"
         items={[
@@ -52,6 +53,7 @@ function HomePage() {
           { title: "Leadership development", subtitle: "Building tomorrow's leaders today" }
         ]}
         imageType="bird"
+        imageLeft={false}
       />
       <TheNext />
       <Statistics />
@@ -111,11 +113,86 @@ function ContactPage() {
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        setIsVisible(false);
+      } else {
+        // Scrolling up
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <Router>
       <div className="min-h-screen bg-white">
-        <nav className="fixed top-0 w-full bg-white text-gray-900 z-50 px-8 py-4 shadow-md">
+        <style>
+          {`
+            @keyframes textGlow {
+              0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                             0 0 20px rgba(255, 255, 255, 0.3),
+                             0 0 30px rgba(255, 255, 255, 0.2);
+                transform: translateY(0);
+              }
+              50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                             0 0 30px rgba(255, 255, 255, 0.6),
+                             0 0 40px rgba(255, 255, 255, 0.4);
+                transform: translateY(-2px);
+              }
+            }
+
+            @keyframes fadeInUp {
+              0% {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              100% {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            @keyframes pulse {
+              0%, 100% {
+                opacity: 1;
+              }
+              50% {
+                opacity: 0.8;
+              }
+            }
+
+            .animate-text-glow {
+              animation: textGlow 3s ease-in-out infinite;
+            }
+
+            .animate-fade-in-up-infinite {
+              animation: fadeInUp 2s ease-out infinite;
+            }
+
+            .animate-pulse-slow {
+              animation: pulse 4s ease-in-out infinite;
+            }
+          `}
+        </style>
+        
+        <nav className={`fixed top-0 w-full bg-white text-gray-900 z-50 px-8 py-4 shadow-md transition-transform duration-300 ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-12">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
@@ -125,17 +202,21 @@ function App() {
                 </h1>
               </Link>
               <div className="hidden md:flex gap-8 text-sm">
-                <Link to="/what-we-do" className="hover:text-purple-600 transition">
+                <Link to="/what-we-do" className="relative hover:text-purple-600 transition group">
                   WHAT WE DO
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/clients" className="hover:text-purple-600 transition">
+                <Link to="/clients" className="relative hover:text-purple-600 transition group">
                   CLIENTS
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/think" className="hover:text-purple-600 transition">
+                <Link to="/think" className="relative hover:text-purple-600 transition group">
                   MISSION
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/contact" className="hover:text-purple-600 transition">
+                <Link to="/contact" className="relative hover:text-purple-600 transition group">
                   CONTACT
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </div>
             </div>
