@@ -19,6 +19,20 @@ import ScrollToTop from './components/ScrollToTop';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import ScrollIndicator from './components/Scrollindictor';
 
+// Type definitions
+interface SearchResult {
+  title: string;
+  path: string;
+  type: string;
+}
+
+interface SearchModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+}
+
 // Page Components
 function HomePage() {
   return (
@@ -115,10 +129,132 @@ function ContactPage() {
   );
 }
 
+// Search Modal Component
+function SearchModal({ isOpen, onClose, searchQuery, setSearchQuery }: SearchModalProps) {
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      // Simulate search - you can replace this with actual search logic
+      const allContent: SearchResult[] = [
+        { title: 'Digital Core Capabilities', path: '/', type: 'Service' },
+        { title: 'Digital Operating Model', path: '/', type: 'Service' },
+        { title: 'Empowering Talent Transformations', path: '/', type: 'Service' },
+        { title: 'What We Do', path: '/what-we-do', type: 'Page' },
+        { title: 'Clients', path: '/clients', type: 'Page' },
+        { title: 'Mission', path: '/think', type: 'Page' },
+        { title: 'Contact', path: '/contact', type: 'Page' },
+        { title: 'Cloud-first approach', path: '/', type: 'Service' },
+        { title: 'Automation & AI', path: '/', type: 'Service' },
+        { title: 'Agile transformation', path: '/', type: 'Service' },
+      ];
+
+      const filtered = allContent.filter(item =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSearchResults(filtered);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    // Close on escape key
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm">
+      <div className="min-h-screen px-4 pt-20">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center gap-4">
+                <Search className="w-6 h-6 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search for services, pages, or content..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 text-lg outline-none"
+                  autoFocus
+                />
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-gray-100 rounded-full transition"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="max-h-96 overflow-y-auto">
+              {searchQuery.trim() === '' ? (
+                <div className="p-8 text-center text-gray-500">
+                  <p>Start typing to search...</p>
+                </div>
+              ) : searchResults.length === 0 ? (
+                <div className="p-8 text-center text-gray-500">
+                  <p>No results found for "{searchQuery}"</p>
+                </div>
+              ) : (
+                <div className="divide-y divide-gray-100">
+                  {searchResults.map((result, index) => (
+                    <Link
+                      key={index}
+                      to={result.path}
+                      onClick={onClose}
+                      className="block p-4 hover:bg-gray-50 transition"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-semibold text-gray-900">{result.title}</h3>
+                          <p className="text-sm text-gray-500 mt-1">{result.type}</p>
+                        </div>
+                        <div className="text-blue-600">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="mt-4 text-center text-sm text-white/70">
+            Press <kbd className="px-2 py-1 bg-white/20 rounded">ESC</kbd> to close
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,6 +275,16 @@ function App() {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  const handleSearchOpen = () => {
+    setIsSearchOpen(true);
+    setSearchQuery('');
+  };
+
+  const handleSearchClose = () => {
+    setIsSearchOpen(false);
+    setSearchQuery('');
+  };
 
   return (
     <Router>
@@ -191,8 +337,20 @@ function App() {
             .animate-pulse-slow {
               animation: pulse 4s ease-in-out infinite;
             }
+
+            kbd {
+              font-family: monospace;
+            }
           `}
         </style>
+        
+        {/* Search Modal */}
+        <SearchModal 
+          isOpen={isSearchOpen}
+          onClose={handleSearchClose}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
         
         <nav className={`fixed top-0 w-full bg-transparent z-50 px-8 py-4 transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
@@ -220,15 +378,21 @@ function App() {
                 </Link>
                 <Link to="/contact" className="relative hover:text-purple-300 transition group text-blue-800">
                   CONTACT
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Search className="w-5 h-5 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+              <button 
+                onClick={handleSearchOpen}
+                className="focus:outline-none"
+                aria-label="Open search"
+              >
+                <Search className="w-5 h-5 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+              </button>
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden"
+                className="md:hidden focus:outline-none"
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
