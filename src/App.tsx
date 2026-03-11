@@ -17,49 +17,53 @@ import Mission from './components/Mission';
 import Clients from './components/Clients';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
+import ScrollIndicator from './components/Scrollindictor';
 
 // Page Components
 function HomePage() {
   return (
     <>
       <Hero />
-      <ColorSection
-        bgColor="bg-amber-700"
-        title="Digital Core Capabilities"
-        description="Reimagine your business with cloud-native platforms and intelligent automation"
-        items={[
-          { title: "Cloud-first approach", subtitle: "Accelerate innovation with scalable solutions" },
-          { title: "Automation & AI", subtitle: "Transform operations with intelligent systems" }
-        ]}
-        imageType="butterfly"
-      />
-      <ColorSection
-        bgColor="bg-blue-600"
-        title="Digital Operating Model"
-        description="Navigate complexity with agile frameworks and collaborative ecosystems"
-        items={[
-          { title: "Agile transformation", subtitle: "Enable rapid adaptation to market changes" },
-          { title: "Data-driven insights", subtitle: "Unlock value from your digital infrastructure" }
-        ]}
-        imageType="technology"
-        imageLeft={true}
-      />
-      <ColorSection
-        bgColor="bg-yellow-500"
-        title="Empowering Talent Transformations"
-        description="Cultivate future-ready skills and foster inclusive growth"
-        items={[
-          { title: "Learning experiences", subtitle: "Continuous development programs" },
-          { title: "Leadership development", subtitle: "Building tomorrow's leaders today" }
-        ]}
-        imageType="bird"
-        imageLeft={false}
-      />
-      <TheNext />
-      <Statistics />
-      <OpportunityBanner />
-      <Purpose />
-      <About />
+      {/* Wrap the sections you want to track in a div with id */}
+      <div id="target-section">
+        <ColorSection
+          bgColor="bg-amber-700"
+          title="Digital Core Capabilities"
+          description="Reimagine your business with cloud-native platforms and intelligent automation"
+          items={[
+            { title: "Cloud-first approach", subtitle: "Accelerate innovation with scalable solutions" },
+            { title: "Automation & AI", subtitle: "Transform operations with intelligent systems" }
+          ]}
+          imageType="butterfly"
+        />
+        <ColorSection
+          bgColor="bg-blue-600"
+          title="Digital Operating Model"
+          description="Navigate complexity with agile frameworks and collaborative ecosystems"
+          items={[
+            { title: "Agile transformation", subtitle: "Enable rapid adaptation to market changes" },
+            { title: "Data-driven insights", subtitle: "Unlock value from your digital infrastructure" }
+          ]}
+          imageType="technology"
+          imageLeft={true}
+        />
+        <ColorSection
+          bgColor="bg-yellow-500"
+          title="Empowering Talent Transformations"
+          description="Cultivate future-ready skills and foster inclusive growth"
+          items={[
+            { title: "Learning experiences", subtitle: "Continuous development programs" },
+            { title: "Leadership development", subtitle: "Building tomorrow's leaders today" }
+          ]}
+          imageType="bird"
+          imageLeft={false}
+        />
+        <TheNext />
+        <Statistics />
+        <OpportunityBanner />
+        <Purpose />
+        <About />
+      </div>
       <News />
       <Investors />
     </>
@@ -272,6 +276,9 @@ function App() {
             </div>
           </div>
         </nav>
+
+        {/* Scroll Indicator - only shown on home page */}
+        <ScrollIndicator />
 
         <ScrollToTopOnRouteChange />
         <Routes>
