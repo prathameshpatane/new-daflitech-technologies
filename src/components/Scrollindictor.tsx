@@ -48,7 +48,7 @@ const ScrollIndicator = () => {
 
   return (
     <div
-      className={`fixed left-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-500 ${
+      className={`fixed left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
       }`}
     >
@@ -58,13 +58,13 @@ const ScrollIndicator = () => {
             {/* Top Line */}
             <div
               className={`h-px transition-all duration-300 ${
-                index <= activeSection ? 'w-16 bg-gray-800' : 'w-8 bg-gray-300'
+                index <= activeSection ? 'w-12 md:w-16 bg-gray-800' : 'w-6 md:w-8 bg-gray-300'
               }`}
             />
             
-            {/* Text label - only show for active section */}
+            {/* Text label - only show for active section on larger screens */}
             {index === activeSection && (
-              <span className="text-base text-gray-600 font-medium animate-fade-in pl-1">
+              <span className="hidden md:block text-sm md:text-base text-gray-600 font-medium animate-fade-in pl-1 whitespace-nowrap">
                 {section}
               </span>
             )}
@@ -72,7 +72,7 @@ const ScrollIndicator = () => {
             {/* Bottom Line */}
             <div
               className={`h-px transition-all duration-300 ${
-                index <= activeSection ? 'w-16 bg-gray-800' : 'w-8 bg-gray-300'
+                index <= activeSection ? 'w-12 md:w-16 bg-gray-800' : 'w-6 md:w-8 bg-gray-300'
               }`}
             />
           </div>
