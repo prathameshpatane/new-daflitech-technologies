@@ -7,7 +7,7 @@ const ScrollIndicator = () => {
   const sections = [
     'Digital Core',
     'Operating Model',
-    'Talent Transform',
+    'Transform',
     'The next',
     'Statistics',
     'Opportunity',

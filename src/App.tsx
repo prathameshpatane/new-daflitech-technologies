@@ -359,24 +359,24 @@ function App() {
             <div className="flex items-center gap-12">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
                 <img src="/daflitech.png" alt="Daflitech" className="h-10 w-auto" />
-                <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition text-blue-800">
+                <h1 className="text-xl font-bold cursor-pointer hover:opacity-70 transition text-white">
                   Daflitech Technologies
                 </h1>
               </Link>
               <div className="hidden md:flex gap-8 text-sm">
-                <Link to="/what-we-do" className="relative hover:text-purple-300 transition group text-blue-800">
+                <Link to="/what-we-do" className="relative hover:text-purple-300 transition group text-white">
                   WHAT WE DO
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/clients" className="relative hover:text-purple-300 transition group text-blue-800">
+                <Link to="/clients" className="relative hover:text-purple-300 transition group text-white">
                   CLIENTS
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/think" className="relative hover:text-purple-300 transition group text-blue-800">
+                <Link to="/think" className="relative hover:text-purple-300 transition group text-white">
                   MISSION
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link to="/contact" className="relative hover:text-purple-300 transition group text-blue-800">
+                <Link to="/contact" className="relative hover:text-purple-300 transition group text-white">
                   CONTACT
                   <span className="absolute bottom-0 left-0 w-0.5 bg-purple-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
@@ -388,19 +388,19 @@ function App() {
                 className="focus:outline-none"
                 aria-label="Open search"
               >
-                <Search className="w-5 h-5 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+                <Search className="w-5 h-5 cursor-pointer hover:text-purple-300 transition text-white" />
               </button>
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden focus:outline-none"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+                  <X className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-white" />
                 ) : (
-                  <Menu className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+                  <Menu className="w-6 h-6 cursor-pointer hover:text-purple-300 transition text-white" />
                 )}
               </button>
-              <Menu className="hidden md:block w-6 h-6 cursor-pointer hover:text-purple-300 transition text-blue-800" />
+              <Menu className="hidden md:block w-6 h-6 cursor-pointer hover:text-purple-300 transition text-white" />
             </div>
           </div>
           
